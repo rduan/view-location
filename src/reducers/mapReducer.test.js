@@ -1,5 +1,6 @@
 import mapReducer from "./mapReducer";
-import {expect} from 'chai'
+import {expect} from 'chai';
+import df from 'deep-freeze-strict';
 
 describe('mapReducer', () => {
   
@@ -11,7 +12,7 @@ describe('mapReducer', () => {
       isFetching: true,
       url: undefined
     }
-    let res = mapReducer('',action);
+    let res = mapReducer(df(''),df(action));
     expect(res).to.deep.equal(state);
     
   });
