@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from './actions';
 
 
-class App extends Component {
+export class App extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -47,8 +47,8 @@ class App extends Component {
 
 function mapStateToProps({isFetching, url}) {
   return {
-    isFetching,
-    url
+    isFetching: state.isFetching,
+    url: state.url
   }
 }
 

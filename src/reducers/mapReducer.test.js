@@ -1,6 +1,7 @@
 import mapReducer from "./mapReducer";
 import {expect} from 'chai';
-import df from 'deep-freeze-strict';
+// import df from 'deep-freeze-strict';
+const df= require('deep-freeze-strict');
 
 describe('mapReducer', () => {
   
