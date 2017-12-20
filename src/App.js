@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import redux from 'redux';
+// import redux from 'redux';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './actions';
@@ -9,25 +9,31 @@ import * as actions from './actions';
 
 export class App extends Component {
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    console.log(props);
+    super(props);
     this.state = {
-      isFetching: this.props.isFetching,
-      url: this.props.url 
+      isFetching: props.isFetching,
+      url: props.url 
     }
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.props.actions.fetchLocation();
   }
 
   render() {
-    let loc;    
-    if (this.state.isFetching) {
-       loc = 'Loading...';
-    } else if (this.state.url) {
-       loc = '<a href="' + this.state.url + '" target="_blank">View Your Location</a>';
-    }
+    let loc = ()=>{
+      if (this.props.isFetching) {
+        return ('Loading...');
+     } else if (this.props.url) {
+        return (<a href={this.props.url}  target="_blank">View Your Location</a>);
+     }
+    }    
+    
+
+    console.log(loc);
 
     return (
       <div className="App">
@@ -38,17 +44,18 @@ export class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        Loading....
-        {loc}
+        
+        {loc()}
       </div>
     );
   }
 }
 
-function mapStateToProps({isFetching, url}) {
+function mapStateToProps(state) {
+  console.log(state);
   return {
-    isFetching: state.isFetching,
-    url: state.url
+    isFetching: state.location.isFetching,
+    url: state.location.url
   }
 }
 
